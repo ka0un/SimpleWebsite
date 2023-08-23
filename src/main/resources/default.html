@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>YourServer</title>
+    <meta name="title" content="YourServer" />
+    <meta name="description" content="YourServer Description" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourserver.com/" />
+    <meta property="og:title" content="YourServer" />
+    <meta property="og:description" content="YourServer Description" />
+    <meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourserver.com/" />
+    <meta property="twitter:title" content="YourServer" />
+    <meta property="twitter:description" content="YourServer Description" />
+    <meta name="theme-color" content="#5e8849" />
+    <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --main-color: rgb(94, 136, 73);
+            --main-color-dark: rgb(58, 88, 44);
+            --border-color: hsla(0, 0%, 100%, 0.349);
+            --copy-ip-hover: rgba(255, 255, 255, 0.102);
+            --copy-ip-click: rgba(255, 255, 255, 0.2);
+            --background-color: rgb(12, 13, 14);
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: "Outfit", sans-serif;
+            padding: 0.5rem;
+            overflow-y: hidden;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: 4.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 200;
+            max-width: 40rem;
+        }
+
+        button {
+            background-color: transparent;
+            border: solid gray 1px;
+            padding: 0.75rem 3rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: larger;
+            margin-bottom: 0.5rem;
+            transition: all 0.1s;
+        }
+
+        button svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        button:active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        @media only screen and (max-width: 786px) {
+            body {
+                overflow-y: visible;
+            }
+            h1 {
+                padding-top: 4rem;
+            }
+            nav {
+                flex-direction: column;
+                padding-bottom: 4rem;
+            }
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            background: var(--main-color);
+            border: 2px solid var(--border-color);
+            box-shadow: 0px 5px 0px var(--main-color-dark);
+            border-radius: 1px;
+            padding: 0.5rem 3rem;
+            transition: all 0.1s;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            box-shadow: none;
+            transform: translateY(5px);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Your Server</h1>
+		<button class="copy-ip-button" onclick="copyIp()">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            </svg>
+            mc.yourserver.com
+        </button>
+        <p>
+            Lorem ipsum dolor sit <strong>amet</strong> consectetur adipisicing elit. Perferendis provident velit quibusdam doloremque dolorum molestias.
+        </p>
+        <nav>
+            <a href="" title="">Store</a>
+            <a href="" title="">Vote</a>
+            <a href="" title="">Discord</a>
+            
+        </nav>
+    </main>
+    <script>
+    function copyIp() {
+        navigator.clipboard
+            .writeText("mc.yourserver.com")  // Replace with your server IP
+            .then(() => {
+                const copyButton = document.querySelector('.copy-ip-button');
+                copyButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    mc.yourserver.com
+                `;
+            })
+            .catch((error) => {
+                console.error(`Failed to copy IP to clipboard: ${error}`);
+            });
+    }
+	</script>
+</body>
+</html>
+
+
+

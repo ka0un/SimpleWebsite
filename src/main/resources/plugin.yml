@@ -1,0 +1,3 @@
+name: SimpleWebsite
+version: '${project.version}'
+main: org.kasun.website.SimpleWebsite
