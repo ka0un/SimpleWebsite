@@ -24,13 +24,16 @@ public class WebServer {
     private static WebServer instance;
     private int port;
     private boolean useSSL;
+    private String indexFile, keyStorePassword;
 
-    public WebServer(String websiteFolder, int port, boolean useSSL) {
+    public WebServer(String websiteFolder, String indexFile, int port, boolean useSSL, String keyStorePassword) {
         this.plugin = SimpleWebsite.getInstance();
         this.name = name;
         this.websiteFolder = websiteFolder;
         this.port = port;
         this.useSSL = useSSL;
+        this.indexFile = indexFile;
+        this.keyStorePassword = keyStorePassword;
         instance = this;
 
         if (useSSL) {
@@ -40,8 +43,7 @@ public class WebServer {
 
     private void setupSSL() {
         try {
-            // Load your keystore here (replace "keystore.p12" and "keystore_password" with your values)
-            char[] keystorePassword = "test".toCharArray();
+            char[] keystorePassword = keyStorePassword.toCharArray();
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             keyStore.load(new FileInputStream(plugin.getDataFolder() + "/keystore.p12"), keystorePassword);
 
@@ -68,10 +70,10 @@ public class WebServer {
 
     public void start() {
         // Check if the example HTML file needs to be created
-        File exampleHtml = new File(plugin.getDataFolder() + "/public/" + websiteFolder + "/index.html");
+        File exampleHtml = new File(plugin.getDataFolder() + "/public/" + websiteFolder + "/" + indexFile);
 
         if (!exampleHtml.exists()) {
-            System.out.println("index.html not found, creating..." + exampleHtml);
+            System.out.println(indexFile + " not found, creating..." + exampleHtml);
             FileUtils fileUtils = new FileUtils();
 
             try {
@@ -79,6 +81,7 @@ public class WebServer {
                 webFolder.mkdir();
                 File destinationFolder = new File(plugin.getDataFolder() + "/public/" + websiteFolder);
                 fileUtils.copyFileFromResources("index.html", destinationFolder);
+                boolean renamed = fileUtils.renameFile(destinationFolder + "/index.html", indexFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -124,7 +127,7 @@ public class WebServer {
         public void handle(HttpExchange exchange) throws IOException {
             String requestPath = exchange.getRequestURI().getPath();
             if (requestPath.equals("/")) {
-                requestPath = "index.html"; // Default file to serve
+                requestPath = indexFile; // Default file to serve
             }
 
             String websitefilepath = plugin.getDataFolder() + "/public/" + webfolder + "/" + requestPath;

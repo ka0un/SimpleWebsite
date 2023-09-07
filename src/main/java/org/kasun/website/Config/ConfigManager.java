@@ -1,12 +1,15 @@
 package org.kasun.website.Config;
 
 import org.bukkit.plugin.Plugin;
+import org.kasun.website.MainManager;
 import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.FileUtils;
 
 import java.io.File;
 
 public class ConfigManager {
+
+    private MainConfig mainConfig;
     public ConfigManager(){
         //copy config.yml
         Plugin plugin = SimpleWebsite.getInstance();
@@ -22,13 +25,18 @@ public class ConfigManager {
                 File defaultFolder = new File(plugin.getDataFolder() + "/public/default");
                 publicFolder.mkdir();
                 defaultFolder.mkdir();
+                fileUtils.copyFileFromResources("keystore.p12", plugin.getDataFolder());
                 fileUtils.copyFileFromResources("default.html", defaultFolder);
                 boolean renamed = fileUtils.renameFile(defaultFolder + "/default.html", "index.html");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        mainConfig = new MainConfig(SimpleWebsite.getInstance());
 
+    }
 
+    public MainConfig getMainConfig() {
+        return mainConfig;
     }
 }

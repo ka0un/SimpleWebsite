@@ -1,13 +1,23 @@
 package org.kasun.website.Server;
 
-public class WebServerManager {
-    public WebServerManager(){
-        //start web server
+import org.bukkit.plugin.Plugin;
+import org.kasun.website.Config.MainConfig;
+import org.kasun.website.SimpleWebsite;
 
-        WebServer webServer = new WebServer("default", 8081, true);
-        webServer.start();
-        WebServer webServer2 = new WebServer("web2", 8082, false);
-        webServer2.start();
+public class WebServerManager {
+    WebServer ws;
+
+    public WebServerManager(){
+        SimpleWebsite plugin = SimpleWebsite.getInstance();
+        MainConfig mainConfig = new MainConfig(plugin);
+
+        ws = new WebServer("default", mainConfig.indexFile, mainConfig.port, mainConfig.useSSL, mainConfig.keyStorePassword);
+        ws.start();
+
+    }
+
+    public WebServer getWebServer() {
+        return ws;
     }
 
 
