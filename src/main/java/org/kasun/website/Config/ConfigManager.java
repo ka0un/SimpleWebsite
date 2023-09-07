@@ -12,12 +12,6 @@ public class ConfigManager {
         Plugin plugin = SimpleWebsite.getInstance();
         plugin.saveDefaultConfig();
 
-        //copy messages.yml
-        File exampleHtml = new File(plugin.getDataFolder() + "messages.yml");
-        if (!exampleHtml.exists()) {
-            plugin.saveResource("messages.yml", false);
-        }
-
         //copy public folder from jar
         FileUtils fileUtils = new FileUtils();
 
