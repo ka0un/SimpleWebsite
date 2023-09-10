@@ -1,6 +1,7 @@
 package org.kasun.website;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.website.Commands.WebsiteCommand;
 
 public class SimpleWebsite extends JavaPlugin {
     private MainManager mainManager;
@@ -8,6 +9,7 @@ public class SimpleWebsite extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getCommand("website").setExecutor(new WebsiteCommand());
         instance = this;
         getLogger().info("Website Plugin has been enabled!");
         mainManager = new MainManager();

@@ -1,6 +1,5 @@
 package org.kasun.website.Server;
 
-import org.bukkit.plugin.Plugin;
 import org.kasun.website.Config.MainConfig;
 import org.kasun.website.SimpleWebsite;
 

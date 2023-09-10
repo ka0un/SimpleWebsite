@@ -1,3 +1,9 @@
 name: SimpleWebsite
 version: '${project.version}'
 main: org.kasun.website.SimpleWebsite
+softdepend:
+  - PlaceholderAPI
+commands:
+  website:
+    description: Opens the website
+    usage: /<command>
