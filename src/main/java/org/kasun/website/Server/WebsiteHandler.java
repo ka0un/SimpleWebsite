@@ -87,6 +87,7 @@ public class WebsiteHandler implements HttpHandler {
         Random random = new Random();
         int randomInt = random.nextInt(1000);
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
@@ -104,6 +105,7 @@ public class WebsiteHandler implements HttpHandler {
         String id = requestPath.substring("/api/placeholder/".length());
 
         if (id.equals("") || id == null) {
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(400, 0);
 
@@ -122,6 +124,7 @@ public class WebsiteHandler implements HttpHandler {
                 }
             }
             if (!isWhitelisted) {
+                exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
                 exchange.getResponseHeaders().set("Content-Type", "application/json");
                 exchange.sendResponseHeaders(400, 0);
 
@@ -136,6 +139,7 @@ public class WebsiteHandler implements HttpHandler {
         String placeholderValue = PlaceholderAPIIntegration.getPlaceholderValue(id);
 
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
@@ -180,6 +184,7 @@ public class WebsiteHandler implements HttpHandler {
         }
 
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(responseCode, 0);
 
@@ -193,6 +198,7 @@ public class WebsiteHandler implements HttpHandler {
         Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
         int onlinePlayers = players.length;
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
@@ -206,6 +212,7 @@ public class WebsiteHandler implements HttpHandler {
     private void handleMaxApi(HttpExchange exchange) throws IOException {
         int maxPlayers = Bukkit.getServer().getMaxPlayers();
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
@@ -219,6 +226,7 @@ public class WebsiteHandler implements HttpHandler {
     private void handleStatusApi(HttpExchange exchange) throws IOException {
         String status = Bukkit.getServer().getMotd();
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
@@ -232,6 +240,7 @@ public class WebsiteHandler implements HttpHandler {
     private void handleVersionApi(HttpExchange exchange) throws IOException {
         String version = Bukkit.getServer().getVersion();
         // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, 0);
 
