@@ -5,6 +5,7 @@
 # Web Server configuration
 #==============================================================================
 webserver:
+  domain: localhost
   indexFile: index.html
   port: 8081
 ssl:

@@ -13,7 +13,8 @@ public class MainConfig {
     private FileConfiguration config;
     private SimpleWebsite plugin;
     public String indexFile,
-            keyStorePassword;
+            keyStorePassword,
+            domain;
     public int port;
     public boolean useSSL,
    whitelistPlaceholders;
@@ -36,7 +37,7 @@ public class MainConfig {
         ConfigurationSection webserver = config.getConfigurationSection("webserver");
         indexFile = webserver.getString("indexFile");
         port = webserver.getInt("port");
-
+        domain = webserver.getString("domain");
     }
 
     private void loadSSL() {
