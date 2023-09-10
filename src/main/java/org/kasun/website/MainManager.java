@@ -12,7 +12,7 @@ public class MainManager {
     public MainManager(){
         configManager = new ConfigManager();
         webServerManager = new WebServerManager();
-        updateChecker = new UpdateChecker(SimpleWebsite.getInstance(), "https://raw.githubusercontent.com/ka0un/SimpleWebsite/master/ver.txt", "1.0.0");
+        updateChecker = new UpdateChecker(SimpleWebsite.getInstance(), "https://raw.githubusercontent.com/ka0un/SimpleWebsite/master/ver.txt", SimpleWebsite.getInstance().getDescription().getVersion());
     }
 
     // getters and setters

@@ -9,7 +9,6 @@ import java.io.*;
 public class FileUtils {
     private Plugin plugin;
 
-
     public void copyFileFromResources(String fileName, File destinationFolder) throws IOException {
         try (InputStream inputStream = getClass().getResourceAsStream("/" + fileName);
              FileOutputStream outputStream = new FileOutputStream(new File(destinationFolder, fileName))) {
