@@ -38,6 +38,8 @@ public class WebsiteHandler implements HttpHandler {
             handleOnlineApi(exchange);
         }else if (requestPath.startsWith("/api/max/")) {
             handleMaxApi(exchange);
+        }else if (requestPath.startsWith("/api/version/")) {
+            handleVersionApi(exchange);
         }else if (requestPath.startsWith("/api/players/")){
             handlePlayers(exchange);
         }else if (requestPath.startsWith("/api/placeholder/")) {
@@ -51,8 +53,6 @@ public class WebsiteHandler implements HttpHandler {
         }else{
             serveFiles(exchange);
         }
-
-
 
 
     }
@@ -229,9 +229,18 @@ public class WebsiteHandler implements HttpHandler {
         }
     }
 
+    private void handleVersionApi(HttpExchange exchange) throws IOException {
+        String version = Bukkit.getServer().getVersion();
+        // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
+        exchange.sendResponseHeaders(200, 0);
 
-
-
+        try (OutputStream os = exchange.getResponseBody()) {
+            // Return the random number as JSON
+            String jsonResponse = "{\"value\": \"" + version + "\"}";
+            os.write(jsonResponse.getBytes());
+        }
+    }
 
 }
 
