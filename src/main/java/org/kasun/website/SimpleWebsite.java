@@ -9,10 +9,10 @@ public class SimpleWebsite extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getCommand("website").setExecutor(new WebsiteCommand());
         instance = this;
         getLogger().info("Website Plugin has been enabled!");
         mainManager = new MainManager();
+        getCommand("website").setExecutor(new WebsiteCommand());
 
     }
 

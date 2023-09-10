@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.PlaceholderAPIIntegration;
 
 import java.io.*;
@@ -17,6 +18,7 @@ public class WebsiteHandler implements HttpHandler {
     private String webfolder;
     private String indexFile;
     private Plugin plugin;
+    SimpleWebsite sw = SimpleWebsite.getInstance();
 
     public WebsiteHandler(String webfolder, String indexFile, Plugin plugin) {
         this.webfolder = webfolder;
@@ -109,6 +111,25 @@ public class WebsiteHandler implements HttpHandler {
                 // Return the random number as JSON
                 String jsonResponse = "{\"error\": \"No placeholder id provided\", \"example\": \"/api/placeholder/server_online\"}";
                 os.write(jsonResponse.getBytes());
+            }
+        }
+
+        if (sw.getMainManager().getConfigManager().getMainConfig().whitelistPlaceholders) {
+            boolean isWhitelisted = false;
+            for (String whitelistedPlaceholder : sw.getMainManager().getConfigManager().getMainConfig().placeholderWhitelist) {
+                if (whitelistedPlaceholder.equalsIgnoreCase(id)) {
+                    isWhitelisted = true;
+                }
+            }
+            if (!isWhitelisted) {
+                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.sendResponseHeaders(400, 0);
+
+                try (OutputStream os = exchange.getResponseBody()) {
+                    // Return the random number as JSON
+                    String jsonResponse = "{\"error\": \"Placeholder not whitelisted\", \"example\": \"/api/placeholder/server_online\"}";
+                    os.write(jsonResponse.getBytes());
+                }
             }
         }
 

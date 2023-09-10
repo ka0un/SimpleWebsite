@@ -1,7 +1,6 @@
 package org.kasun.website.Config;
 
 import org.bukkit.plugin.Plugin;
-import org.kasun.website.MainManager;
 import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.FileUtils;
 
@@ -11,9 +10,8 @@ public class ConfigManager {
 
     private MainConfig mainConfig;
     public ConfigManager(){
-        //copy config.yml
         Plugin plugin = SimpleWebsite.getInstance();
-        plugin.saveDefaultConfig();
+        mainConfig = new MainConfig(SimpleWebsite.getInstance());
 
         //copy public folder from jar
         FileUtils fileUtils = new FileUtils();

@@ -4,13 +4,14 @@
 #==============================================================================
 # Web Server configuration
 #==============================================================================
-indexFile: index.html
-port: 8081
-
-#==============================================================================
-# SSL configuration
-#==============================================================================
-useSSL: false
-keyStorePassword: test
-
-
+webserver:
+  indexFile: index.html
+  port: 8081
+ssl:
+  useSSL: false
+  keyStorePassword: test
+api:
+  whitelistPlaceholders: false
+  placeholder-whitelist:
+    - 'server_online'
+    - 'server_max_players'
