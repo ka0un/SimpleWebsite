@@ -7,8 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kasun.website.SimpleWebsite;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URL;
 
 public class WebsiteCommand implements CommandExecutor {
@@ -38,7 +40,6 @@ public class WebsiteCommand implements CommandExecutor {
             http = "https://";
         }
 
-        sb.append("Website: ");
         sb.append(http);
         sb.append(domain);
         sb.append(":");
@@ -46,10 +47,15 @@ public class WebsiteCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', sb.toString()));
+            try{
+                Desktop.getDesktop().browse(new URI(sb.toString()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eWebsite : &f" + sb.toString()));
         }else {
             plugin.getLogger().info(sb.toString());
         }
-        return false;
+        return true;
     }
 }
