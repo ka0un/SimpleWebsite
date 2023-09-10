@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
-    <title>YourServer</title>
+    <title>YourServer</title>  <!-- [1] Your Page Title Eg:- Your Server Name -->
     <meta name="title" content="YourServer" />
     <meta name="description" content="YourServer Description" />
 
@@ -135,27 +135,59 @@
     </style>
 </head>
 <body>
-    <main>
-        <h1>Your Server</h1>
-		<button class="copy-ip-button" onclick="copyIp()">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            </svg>
-            mc.yourserver.com
-        </button>
-        <p>
-            Lorem ipsum dolor sit <strong>amet</strong> consectetur adipisicing elit. Perferendis provident velit quibusdam doloremque dolorum molestias.
-        </p>
-        <nav>
-            <a href="" title="">Store</a>
-            <a href="" title="">Vote</a>
-            <a href="" title="">Discord</a>
-            
-        </nav>
-    </main>
-    <script>
+<main>
+    <h1>Your Server</h1> <!-- [2] Your Server Name -->
+    <button class="copy-ip-button" onclick="copyIp()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        </svg>
+        mc.yourserver.com <!-- [3] Your Server IP -->
+    </button>
+    <p id="description">
+        Loading...
+    </p>
+    <nav>
+        <a href="https://gotham-store.tebex.io/" title="Store">Store</a> <!-- [4] Your Store Link Eg:-  -->
+        <a href="" title="">Vote</a> <!-- [5] Your Vote Link Eg:-  -->
+        <a href="https://dsc.gg/sundevs" title="Discord">Discord</a> <!-- [6] Your Discord Link Eg:-  -->
+
+    </nav>
+</main>
+<script>
+
+
+
+    function updateDescription(playerCount) {
+        const description = document.getElementById('description');
+
+        if (playerCount === null) {
+            description.textContent = "Server is Offline. We'll be back soon!";
+        } else if (playerCount === 0) {
+            description.textContent = "No players online. Join the adventure!";
+        } else {
+            description.textContent = `Join the adventure with ${playerCount} players online! We're here to provide you with an unforgettable Minecraft experience.`;
+        }
+    }
+
+
+    function updatePlayerCount() {
+        fetch(`http://localhost:8081/api/online/`) // [7] Replace localhost:8081 with your server IP:PORT
+            .then(response => response.json())
+            .then(data => {
+                const playerCount = data.value;
+                updateDescription(playerCount);
+            })
+            .catch(error => {
+                console.error('Failed to fetch player count:', error);
+                updateDescription(null); // Server is offline
+            });
+    }
+
+    // Call the function to update the player count every second
+    setInterval(updatePlayerCount, 1000);
+
     function copyIp() {
         navigator.clipboard
-            .writeText("mc.yourserver.com")  // Replace with your server IP
+            .writeText("mc.yourserver.com")  // [8] Replace mc.yourserver.com with your server IP
             .then(() => {
                 const copyButton = document.querySelector('.copy-ip-button');
                 copyButton.innerHTML = `
@@ -169,7 +201,7 @@
                 console.error(`Failed to copy IP to clipboard: ${error}`);
             });
     }
-	</script>
+</script>
 </body>
 </html>
 
