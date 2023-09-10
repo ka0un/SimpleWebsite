@@ -2,14 +2,17 @@ package org.kasun.website;
 
 import org.kasun.website.Config.ConfigManager;
 import org.kasun.website.Server.WebServerManager;
+import org.kasun.website.Utils.UpdateChecker;
 
 public class MainManager {
     public ConfigManager configManager;
     public WebServerManager webServerManager;
+    private UpdateChecker updateChecker;
 
     public MainManager(){
         configManager = new ConfigManager();
         webServerManager = new WebServerManager();
+        updateChecker = new UpdateChecker(SimpleWebsite.getInstance(), "https://raw.githubusercontent.com/ka0un/SimpleWebsite/master/ver.txt", "1.0.0");
     }
 
     // getters and setters

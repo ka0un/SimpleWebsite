@@ -16,6 +16,7 @@ public class UpdateChecker {
         this.plugin = plugin;
         this.textFileURL = textFileURL;
         this.currentVersion = currentVersion;
+        checkForUpdates();
     }
 
     public void checkForUpdates() {
@@ -31,8 +32,10 @@ public class UpdateChecker {
                         String latestVersion = line.substring("Version: ".length()).trim();
 
                         if (!latestVersion.equals(currentVersion)) {
-                            plugin.getLogger().info("A new version of the plugin is available: " + latestVersion);
-                            plugin.getLogger().info("Please update from: " + textFileURL);
+                            plugin.getLogger().warning("==============================================================");
+                            plugin.getLogger().warning("[!] A new version of the plugin is available: " + latestVersion);
+                            plugin.getLogger().warning("Please update from: https://github.com/ka0un/SimpleWebsite");
+                            plugin.getLogger().warning("==============================================================");
                         } else {
                             plugin.getLogger().info("Your plugin is up to date.");
                         }
