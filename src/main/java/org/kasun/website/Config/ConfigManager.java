@@ -33,6 +33,7 @@ public class ConfigManager {
         mainConfig = new MainConfig(SimpleWebsite.getInstance());
 
     }
+    //testchange
 
     public MainConfig getMainConfig() {
         return mainConfig;

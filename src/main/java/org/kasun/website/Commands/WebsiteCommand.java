@@ -52,7 +52,7 @@ public class WebsiteCommand implements CommandExecutor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eWebsite : &f" + sb.toString()));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eWebsite : &f" + sb));
         }else {
             plugin.getLogger().info(sb.toString());
         }
