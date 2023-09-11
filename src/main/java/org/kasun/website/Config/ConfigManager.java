@@ -23,7 +23,6 @@ public class ConfigManager {
                 File defaultFolder = new File(plugin.getDataFolder() + "/public/default");
                 publicFolder.mkdir();
                 defaultFolder.mkdir();
-                fileUtils.copyFileFromResources("keystore.p12", plugin.getDataFolder());
                 fileUtils.copyFileFromResources("default.html", defaultFolder);
                 boolean renamed = fileUtils.renameFile(defaultFolder + "/default.html", "index.html");
             } catch (Exception e) {

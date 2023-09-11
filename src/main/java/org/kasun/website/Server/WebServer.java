@@ -10,7 +10,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.KeyStore;
+import java.security.cert.CertificateException;
 
 public class WebServer {
     private HttpServer server;
@@ -20,7 +23,7 @@ public class WebServer {
     private final String websiteFolder;
     private static WebServer instance;
     private int port;
-    private boolean useSSL;
+    private boolean useSSL, blockStart = false;
     private String indexFile, keyStorePassword;
 
     public WebServer(String websiteFolder, String indexFile, int port, boolean useSSL, String keyStorePassword) {
@@ -42,7 +45,30 @@ public class WebServer {
         try {
             char[] keystorePassword = keyStorePassword.toCharArray();
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(new FileInputStream(plugin.getDataFolder() + "/keystore.p12"), keystorePassword);
+            try{
+                keyStore.load(Files.newInputStream(Paths.get(plugin.getDataFolder() + "/keystore.p12")), keystorePassword);
+            }catch (Exception e){
+                e.printStackTrace();
+                plugin.getLogger().warning("==============================================================");
+                plugin.getLogger().warning("[!] keystore.p12 issue found, please check the file and try again.");
+                plugin.getLogger().warning("or disable SSL in config.yml");
+                plugin.getLogger().warning("Possible Reasons:");
+                if (e instanceof CertificateException){
+                    plugin.getLogger().warning(" - Certificate in keystore Could not be loaded");
+                }else if (e instanceof IOException) {
+                    plugin.getLogger().warning(" - keystore.p12 file could not be found");
+                    plugin.getLogger().warning(" - keystore.p12 file could not be opened");
+                    plugin.getLogger().warning(" - wrong keystore password in config.yml");
+                }else{
+                    plugin.getLogger().warning(" - Incorrect Keystore Algorithm");
+                    plugin.getLogger().warning(" - unknown error");
+                }
+                plugin.getLogger().warning("==============================================================");
+                blockStart = true;
+                return;
+            }
+
+
 
             KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
             keyManagerFactory.init(keyStore, keystorePassword);
@@ -66,6 +92,9 @@ public class WebServer {
     }
 
     public void start() {
+        if (blockStart) {
+            return;
+        }
         // Check if the example HTML file needs to be created
         File exampleHtml = new File(plugin.getDataFolder() + "/public/" + websiteFolder + "/" + indexFile);
 
@@ -112,7 +141,7 @@ public class WebServer {
             httpsServer.stop(0);
         }
     }
-//testchange
+
 }
 
 
