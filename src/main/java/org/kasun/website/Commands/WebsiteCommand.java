@@ -57,5 +57,7 @@ public class WebsiteCommand implements CommandExecutor {
             plugin.getLogger().info(sb.toString());
         }
         return true;
+
+        //testchange
     }
 }
