@@ -1,6 +1,6 @@
 package org.kasun.website.Config;
 
-import org.bukkit.configuration.ConfigurationOptions;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,9 +9,7 @@ import org.kasun.website.SimpleWebsite;
 import java.io.File;
 
 public class MainConfig {
-    private File configFile;
-    private FileConfiguration config;
-    private SimpleWebsite plugin;
+    private final FileConfiguration config;
     public String indexFile,
             keyStorePassword,
             domain;
@@ -22,10 +20,9 @@ public class MainConfig {
 
 
     public MainConfig(SimpleWebsite plugin) {
-        this.plugin = plugin;
         plugin.getConfig().options().copyDefaults();
         plugin.saveDefaultConfig();
-        configFile = new File(plugin.getDataFolder(), "config.yml");
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
         config = YamlConfiguration.loadConfiguration(configFile);
 
         loadWebServer();

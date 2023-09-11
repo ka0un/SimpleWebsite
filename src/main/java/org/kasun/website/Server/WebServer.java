@@ -15,9 +15,9 @@ import java.security.KeyStore;
 public class WebServer {
     private HttpServer server;
     private HttpsServer httpsServer;
-    private Plugin plugin;
+    private final Plugin plugin;
     private String name;
-    private String websiteFolder;
+    private final String websiteFolder;
     private static WebServer instance;
     private int port;
     private boolean useSSL;
