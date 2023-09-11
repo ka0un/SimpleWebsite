@@ -58,6 +58,5 @@ public class WebsiteCommand implements CommandExecutor {
         }
         return true;
 
-        //testchange
     }
 }
