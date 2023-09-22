@@ -45,4 +45,9 @@ public class FileUtils {
         return renamed;
     }
 
+    public static boolean doesFileExist(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.isFile();
+    }
+
 }

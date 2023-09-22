@@ -11,11 +11,12 @@ import java.io.File;
 public class MainConfig {
     private final FileConfiguration config;
     public String indexFile,
-            keyStorePassword,
+            keystorePassword,
             domain;
     public int port;
     public boolean useSSL,
-   whitelistPlaceholders;
+   whitelistPlaceholders,
+    apiOnly;
     public String[] placeholderWhitelist;
 
 
@@ -40,15 +41,14 @@ public class MainConfig {
     private void loadSSL() {
         ConfigurationSection ssl = config.getConfigurationSection("ssl");
         useSSL = ssl.getBoolean("useSSL");
-        keyStorePassword = ssl.getString("keyStorePassword");
+        keystorePassword = ssl.getString("keystorePassword");
     }
 
     private void loadapi() {
         ConfigurationSection api = config.getConfigurationSection("api");
         whitelistPlaceholders = api.getBoolean("whitelistPlaceholders");
         placeholderWhitelist = api.getStringList("placeholder-whitelist").toArray(new String[0]);
-
+        apiOnly = api.getBoolean("apiOnly");
     }
 
-    //testchange
 }

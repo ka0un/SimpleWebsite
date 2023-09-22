@@ -1,5 +1,6 @@
 package org.kasun.website.Server;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.bukkit.Bukkit;
@@ -12,18 +13,23 @@ import org.kasun.website.Utils.PlaceholderAPIIntegration;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class WebsiteHandler implements HttpHandler {
     private String webfolder;
     private String indexFile;
     private Plugin plugin;
+    private boolean apiOnly;
     SimpleWebsite sw = SimpleWebsite.getInstance();
 
-    public WebsiteHandler(String webfolder, String indexFile, Plugin plugin) {
+    public WebsiteHandler(String webfolder, String indexFile, Plugin plugin, boolean apiOnly) {
         this.webfolder = webfolder;
         this.indexFile = indexFile;
         this.plugin = plugin;
+        this.apiOnly = apiOnly;
     }
 
     @Override
@@ -44,6 +50,8 @@ public class WebsiteHandler implements HttpHandler {
             handlePlayers(exchange);
         }else if (requestPath.startsWith("/api/placeholder/")) {
             handlePlaceholderApi(exchange);
+        }else if (requestPath.startsWith("/api/placeholders/")) {
+            handleMultiplePlaceholdersApi(exchange);
         }else if(requestPath.startsWith("/api/")){
             String response = "Invalid API endpoint";
             exchange.sendResponseHeaders(404, response.length());
@@ -51,7 +59,9 @@ public class WebsiteHandler implements HttpHandler {
                 os.write(response.getBytes());
             }
         }else{
-            serveFiles(exchange);
+            if(!apiOnly){
+                serveFiles(exchange);
+            }
         }
 
 
@@ -148,6 +158,72 @@ public class WebsiteHandler implements HttpHandler {
             os.write(jsonResponse.getBytes());
         }
     }
+
+    private void handleMultiplePlaceholdersApi(HttpExchange exchange) throws IOException {
+
+        // Parse the IDs parameter from the URL
+        String requestPath = exchange.getRequestURI().getPath();
+        String[] idArray = requestPath.substring("/api/placeholders/".length()).split(",");
+
+        // Check if any IDs were provided
+        if (idArray.length == 0 || (idArray.length == 1 && idArray[0].isEmpty())) {
+            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(400, 0);
+
+            try (OutputStream os = exchange.getResponseBody()) {
+                // Return an error message for no placeholder IDs provided
+                String jsonResponse = "{\"error\": \"No placeholder IDs provided\", \"example\": \"/api/placeholders/server_online,another_placeholder\"}";
+                os.write(jsonResponse.getBytes());
+            }
+            return;
+        }
+
+        // Check if any of the IDs are not whitelisted
+        if (sw.getMainManager().getConfigManager().getMainConfig().whitelistPlaceholders) {
+            String[] whitelistedPlaceholders = sw.getMainManager().getConfigManager().getMainConfig().placeholderWhitelist;
+            for (String id : idArray) {
+                boolean isWhitelisted = false;
+                for (String whitelistedPlaceholder : whitelistedPlaceholders) {
+                    if (whitelistedPlaceholder.equalsIgnoreCase(id)) {
+                        isWhitelisted = true;
+                        break;
+                    }
+                }
+                if (!isWhitelisted) {
+                    exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+                    exchange.getResponseHeaders().set("Content-Type", "application/json");
+                    exchange.sendResponseHeaders(400, 0);
+
+                    try (OutputStream os = exchange.getResponseBody()) {
+                        // Return an error message for a non-whitelisted placeholder
+                        String jsonResponse = "{\"error\": \"Placeholder not whitelisted: " + id + "\", \"example\": \"/api/placeholders/server_online,another_placeholder\"}";
+                        os.write(jsonResponse.getBytes());
+                    }
+                    return;
+                }
+            }
+        }
+
+        // Retrieve values for the provided placeholder IDs
+        Map<String, String> placeholderValues = new HashMap<>();
+        for (String id : idArray) {
+            String placeholderValue = PlaceholderAPIIntegration.getPlaceholderValue(id);
+            placeholderValues.put(id, placeholderValue);
+        }
+
+        // Set the response content type to JSON
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
+        exchange.sendResponseHeaders(200, 0);
+
+        try (OutputStream os = exchange.getResponseBody()) {
+            // Return JSON with values for each placeholder ID
+            String jsonResponse = new Gson().toJson(placeholderValues);
+            os.write(jsonResponse.getBytes());
+        }
+    }
+
 
     private void handlePlayers(HttpExchange exchange) throws IOException {
 
@@ -250,6 +326,5 @@ public class WebsiteHandler implements HttpHandler {
             os.write(jsonResponse.getBytes());
         }
     }
-//testchange
 }
 

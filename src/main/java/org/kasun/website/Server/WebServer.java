@@ -2,12 +2,12 @@ package org.kasun.website.Server;
 
 import com.sun.net.httpserver.*;
 import org.bukkit.plugin.Plugin;
+import org.kasun.website.Config.MainConfig;
 import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.FileUtils;
 
 import javax.net.ssl.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
@@ -26,6 +26,10 @@ public class WebServer {
     private boolean useSSL, blockStart = false;
     private String indexFile, keyStorePassword;
 
+    private MainConfig mainConfig;
+
+    private boolean apiOnly;
+
     public WebServer(String websiteFolder, String indexFile, int port, boolean useSSL, String keyStorePassword) {
         this.plugin = SimpleWebsite.getInstance();
         this.name = name;
@@ -35,6 +39,9 @@ public class WebServer {
         this.indexFile = indexFile;
         this.keyStorePassword = keyStorePassword;
         instance = this;
+        mainConfig = new MainConfig(SimpleWebsite.getInstance());
+        apiOnly = mainConfig.apiOnly;
+
 
         if (useSSL) {
             setupSSL();
@@ -42,6 +49,7 @@ public class WebServer {
     }
 
     private void setupSSL() {
+
         try {
             char[] keystorePassword = keyStorePassword.toCharArray();
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
@@ -116,14 +124,14 @@ public class WebServer {
         // Set up the HTTP/HTTPS server
         if(useSSL) {
 
-            httpsServer.createContext("/", new WebsiteHandler(websiteFolder,"index.html", plugin));
+            httpsServer.createContext("/", new WebsiteHandler(websiteFolder,"index.html", plugin, apiOnly));
             httpsServer.setExecutor(null); // Use the default executor
             httpsServer.start();
 
         } else {
             try {
                 server = HttpServer.create(new InetSocketAddress(port), 0);
-                server.createContext("/", new WebsiteHandler(websiteFolder,"index.html", plugin));
+                server.createContext("/", new WebsiteHandler(websiteFolder,"index.html", plugin, apiOnly));
                 server.setExecutor(null); // Use the default executor
                 server.start();
             } catch (IOException e) {
@@ -143,6 +151,7 @@ public class WebServer {
     }
 
 }
+
 
 
 

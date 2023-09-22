@@ -10,7 +10,7 @@ public class WebServerManager {
         SimpleWebsite plugin = SimpleWebsite.getInstance();
         MainConfig mainConfig = new MainConfig(plugin);
 
-        ws = new WebServer("default", mainConfig.indexFile, mainConfig.port, mainConfig.useSSL, mainConfig.keyStorePassword);
+        ws = new WebServer("default", mainConfig.indexFile, mainConfig.port, mainConfig.useSSL, mainConfig.keystorePassword);
         ws.start();
 
     }

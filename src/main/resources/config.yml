@@ -10,8 +10,9 @@ webserver:
   port: 8081
 ssl:
   useSSL: false
-  keyStorePassword: test
+  keystorePassword: test
 api:
+  apiOnly: false
   whitelistPlaceholders: false
   placeholder-whitelist:
     - 'server_online'
