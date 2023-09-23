@@ -5,19 +5,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.kasun.website.SimpleWebsite;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URL;
 
 public class WebsiteCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         SimpleWebsite plugin = SimpleWebsite.getInstance();
 
         StringBuilder sb = new StringBuilder();
@@ -36,7 +37,7 @@ public class WebsiteCommand implements CommandExecutor {
             }
         }
 
-        if (plugin.getMainManager().getConfigManager().getMainConfig().useSSL){
+        if (plugin.getMainManager().getConfigManager().getMainConfig().useSSL) {
             http = "https://";
         }
 
@@ -45,18 +46,24 @@ public class WebsiteCommand implements CommandExecutor {
         sb.append(":");
         sb.append(plugin.getMainManager().getConfigManager().getMainConfig().port);
 
+        String websiteLink = sb.toString();
+
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            try{
-                Desktop.getDesktop().browse(new URI(sb.toString()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eWebsite : &f" + sb));
-        }else {
-            plugin.getLogger().info(sb.toString());
+
+            // Create a clickable link using TextComponent
+            TextComponent message = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&eWebsite: "));
+            TextComponent link = new TextComponent(websiteLink);
+            link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, websiteLink));
+            message.addExtra(link);
+
+            player.spigot().sendMessage(message);
+        } else {
+            plugin.getLogger().info(websiteLink);
         }
         return true;
-
     }
 }
+
+
+
