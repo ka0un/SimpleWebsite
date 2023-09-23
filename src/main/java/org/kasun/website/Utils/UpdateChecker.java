@@ -33,11 +33,11 @@ public class UpdateChecker {
 
                         if (!latestVersion.equals(currentVersion)) {
                             plugin.getLogger().warning("==============================================================");
-                            plugin.getLogger().warning("[!] A new version of the plugin is available: " + latestVersion);
+                            plugin.getLogger().warning("A new version of the plugin is available: " + latestVersion);
                             plugin.getLogger().warning("Please update from: https://github.com/ka0un/SimpleWebsite");
                             plugin.getLogger().warning("==============================================================");
                         } else {
-                            plugin.getLogger().info("Your plugin is up to date.");
+                            StaticLogger.info("Your Plugin is up to date : " + currentVersion );
                         }
 
                         return; // Exit the loop after finding version information
@@ -46,6 +46,7 @@ public class UpdateChecker {
             }
         } catch (IOException e) {
             plugin.getLogger().warning("Failed to check for updates: " + e.getMessage());
+            HandleError.handleError("UpdateChecker - 49");
         }
     }
 }

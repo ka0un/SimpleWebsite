@@ -2,6 +2,7 @@ package org.kasun.website.Server;
 
 import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.FileUtils;
+import org.kasun.website.Utils.HandleError;
 
 import java.io.File;
 
@@ -42,6 +43,7 @@ public class DefaultLandingCreator {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                HandleError.handleError("DefaultLandingCreator-61");
             }
         }
 

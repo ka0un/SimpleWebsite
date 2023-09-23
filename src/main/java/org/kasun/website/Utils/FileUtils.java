@@ -30,7 +30,7 @@ public class FileUtils {
         File oldFile = new File(oldFilePath);
 
         if (!oldFile.exists()) {
-            System.out.println("Old file does not exist.");
+            HandleError.handleError("FileUtils-33");
             return false;
         }
 
@@ -38,7 +38,7 @@ public class FileUtils {
         File newFile = new File(parentDirectory, newFileName);
 
         if (newFile.exists()) {
-            System.out.println("A file with the new name already exists.");
+            HandleError.handleError("FileUtils-41");
             return false;
         }
 
@@ -56,14 +56,13 @@ public class FileUtils {
 
         if (file.exists()) {
             if (file.delete()) {
-                System.out.println("File deleted successfully: " + filePath);
                 return true;
             } else {
-                System.err.println("Unable to delete file: " + filePath);
+                HandleError.handleError("FileUtils-61");
                 return false;
             }
         } else {
-            System.err.println("File not found: " + filePath);
+            HandleError.handleError("FileUtils-66");
             return false;
         }
     }
@@ -93,6 +92,7 @@ public class FileUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            HandleError.handleError("FileUtils-98");
         }
     }
 

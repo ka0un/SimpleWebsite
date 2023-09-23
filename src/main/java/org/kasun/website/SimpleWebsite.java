@@ -1,8 +1,13 @@
 package org.kasun.website;
 
+
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.website.Commands.WebsiteCommand;
 import org.kasun.website.Utils.Metrics;
+import org.kasun.website.Utils.StaticLogger;
+
+
+
 
 public class SimpleWebsite extends JavaPlugin {
     private MainManager mainManager;
@@ -11,12 +16,14 @@ public class SimpleWebsite extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        getLogger().info("Website Plugin has been enabled!");
+        StaticLogger.setLogger(getLogger());
+        StaticLogger.info("============================================");
+        StaticLogger.info("Simple Website Plugin has been enabled!");
         mainManager = new MainManager();
         getCommand("website").setExecutor(new WebsiteCommand());
         int pluginId = 19784;
         Metrics metrics = new Metrics(this, pluginId);
-
+        StaticLogger.info("============================================");
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.kasun.website.Config.MainConfig;
 import org.kasun.website.SimpleWebsite;
 import org.kasun.website.Utils.FileUtils;
+import org.kasun.website.Utils.HandleError;
 
 import javax.net.ssl.*;
 import java.io.File;
@@ -96,6 +97,7 @@ public class WebServer {
             httpsServer.setHttpsConfigurator(configurator);
         } catch (Exception e) {
             e.printStackTrace();
+            HandleError.handleError("WebServer-127");
         }
     }
 
@@ -118,6 +120,7 @@ public class WebServer {
                 boolean renamed = fileUtils.renameFile(destinationFolder + "/index.html", indexFile);
             } catch (Exception e) {
                 e.printStackTrace();
+                HandleError.handleError("WebServer-147");
             }
         }
 
@@ -136,6 +139,7 @@ public class WebServer {
                 server.start();
             } catch (IOException e) {
                 e.printStackTrace();
+                HandleError.handleError("WebServer-163");
             }
         }
 
