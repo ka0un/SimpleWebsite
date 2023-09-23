@@ -2,7 +2,6 @@ package org.kasun.website;
 
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.kasun.website.Commands.WebsiteCommand;
 import org.kasun.website.Utils.Metrics;
 import org.kasun.website.Utils.StaticLogger;
 
