@@ -20,7 +20,6 @@ public class SimpleWebsite extends JavaPlugin {
         StaticLogger.info("============================================");
         StaticLogger.info("Simple Website Plugin has been enabled!");
         mainManager = new MainManager();
-        getCommand("website").setExecutor(new WebsiteCommand());
         int pluginId = 19784;
         Metrics metrics = new Metrics(this, pluginId);
         StaticLogger.info("============================================");

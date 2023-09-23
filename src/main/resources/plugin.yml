@@ -8,5 +8,13 @@ softdepend:
   - PlaceholderAPI
 commands:
   website:
-    description: Opens the website
+    description: Visit Server Website
     usage: /<command>
+  sw:
+    description: Simple Website Admin Command
+    usage: /<command> <args>
+    permission: sw.admin
+    aliases:
+        - simplewebsite
+        - sw
+        - swadmin
