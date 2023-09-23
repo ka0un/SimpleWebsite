@@ -1,12 +1,13 @@
 package org.kasun.website.Commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.kasun.website.SimpleWebsite;
 
-public class SWCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SWCommand implements TabExecutor {
 
     private final SimpleWebsite plugin = SimpleWebsite.getInstance();
     private CommandsManager commandsManager;
@@ -60,42 +61,52 @@ public class SWCommand implements CommandExecutor {
 
     private void sendhelp(CommandSender sender) {
         //Border
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "============================================");
+        sender.sendMessage(ChatColor.YELLOW + "============================================");
 
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "");
+        sender.sendMessage(ChatColor.YELLOW + "");
 
         //Info
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "SimpleWebsite v" + plugin.getDescription().getVersion());
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "Author: " + plugin.getDescription().getAuthors());
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "Website: " + plugin.getDescription().getWebsite());
+        sender.sendMessage(ChatColor.GREEN +  "SimpleWebsite v" + plugin.getDescription().getVersion());
+        sender.sendMessage(ChatColor.YELLOW + "Author: " + ChatColor.WHITE +  plugin.getDescription().getAuthors());
+        sender.sendMessage(ChatColor.YELLOW + "Website: " + ChatColor.WHITE + plugin.getDescription().getWebsite());
 
         //discord
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "Discord: https://dsc.gg/sundevs");
+        sender.sendMessage(ChatColor.YELLOW + "Discord: "+ ChatColor.WHITE +" https://dsc.gg/sundevs");
 
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "");
+        sender.sendMessage(ChatColor.YELLOW + "");
 
         //Commands
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "Commands:");
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "/sw help - View This info");
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "/sw view - View your website");
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "/sw reload - Reload the plugin");
+        sender.sendMessage(ChatColor.GOLD + "Commands:");
+        sender.sendMessage(ChatColor.YELLOW + "/sw help "+ ChatColor.WHITE +"- View This info");
+        sender.sendMessage(ChatColor.YELLOW + "/sw view "+ ChatColor.WHITE +"- View your website");
+        sender.sendMessage(ChatColor.YELLOW + "/sw reload "+ ChatColor.WHITE +"- Reload the plugin");
 
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "");
+        sender.sendMessage(ChatColor.YELLOW + "");
         //permissions
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "Permissions:");
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "sw-admin - Access to all commands");
+        sender.sendMessage(ChatColor.GOLD + "Permissions:");
+        sender.sendMessage(ChatColor.YELLOW + "sw-admin "+ ChatColor.WHITE +"- Access to all commands");
 
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "");
+        sender.sendMessage(ChatColor.YELLOW + "");
 
         //copyright text
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "SimpleWebsite is licensed under the MIT License");
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "SimpleWebsite@Sundevs 2023");
+        sender.sendMessage(ChatColor.YELLOW + "SimpleWebsite is licensed under the MIT License");
+        sender.sendMessage(ChatColor.YELLOW + "SimpleWebsite@Sundevs 2023");
 
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "");
+        sender.sendMessage(ChatColor.YELLOW + "");
 
         //Border
-        sender.sendMessage(ChatColor.GREEN + "[SimpleWebsite] " + ChatColor.YELLOW + "============================================");
+        sender.sendMessage(ChatColor.YELLOW + "============================================");
     }
 
-
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+        if (args.length == 1) {
+            List<String> arguments = new ArrayList<>();
+            arguments.add("help");
+            arguments.add("view");
+            arguments.add("reload");
+            return arguments;
+        }
+        return null;
+    }
 }
