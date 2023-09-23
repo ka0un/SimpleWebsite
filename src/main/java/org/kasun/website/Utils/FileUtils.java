@@ -3,7 +3,8 @@ package org.kasun.website.Utils;
 import org.bukkit.plugin.Plugin;
 
 import java.io.*;
-
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 
 public class FileUtils {
@@ -49,5 +50,51 @@ public class FileUtils {
         File file = new File(filePath);
         return file.exists() && file.isFile();
     }
+
+    public static boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            if (file.delete()) {
+                System.out.println("File deleted successfully: " + filePath);
+                return true;
+            } else {
+                System.err.println("Unable to delete file: " + filePath);
+                return false;
+            }
+        } else {
+            System.err.println("File not found: " + filePath);
+            return false;
+        }
+    }
+
+    public static void unarchiveZipFile(String zipFilePath, String extractToPath) {
+        byte[] buffer = new byte[1024];
+
+        try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFilePath))) {
+            ZipEntry zipEntry;
+
+            // Iterate over each entry in the ZIP file
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                String entryName = zipEntry.getName();
+                String entryPath = extractToPath + File.separator + entryName;
+
+                // Create the directories for the entry path if they don't exist
+                new File(entryPath).mkdirs();
+
+                try (FileOutputStream fos = new FileOutputStream(entryPath)) {
+                    int len;
+                    // Read and write the current entry to the file
+                    while ((len = zipInputStream.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                }
+                zipInputStream.closeEntry();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

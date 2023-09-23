@@ -1,0 +1,379 @@
+<!-- Proudly coded by Billy (https://bybilly.uk) -->
+<!-- Version: 1.9.2 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Info meta tags, important for social media + SEO -->
+	<title>MyServer - Official Website</title>
+	<meta name="description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:title" content="MyServer - Official Website Portal">
+	<meta property="og:site_name" content="MyServer">
+	<meta property="og:description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:image" content="https://bybilly.uk/portal/img/minecraft.jpg">
+	<meta property="og:url" content="https://bybilly.uk/">
+	<meta name="twitter:card" content="summary_large_image">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+	* {
+	box-sizing: border-box;
+}
+
+body {
+	/*Want to change background image?*/
+	/*Upload a new one to the img folder.*/
+	/*Make sure you name it 'minecraft.jpg'*/
+	background: linear-gradient(rgba(20, 26, 35,0.55),rgba(20, 26, 35, 0.55)),
+				url("minecraft.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-family: "Open Sans", Helvetica;
+	margin: 0;
+	position: relative;
+}
+
+html, body {
+	width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	margin: 0;
+	padding: 3px;
+}
+
+.container {
+	text-align: center;
+}
+
+.logo img {
+	width: 225px; /* Change image size for mobile */
+	-webkit-animation-name: logo;
+	        animation-name: logo;
+	-webkit-animation-duration: 5s;
+	        animation-duration: 5s;
+	-webkit-animation-iteration-count: infinite;
+	        animation-iteration-count: infinite;
+	-webkit-animation-timing-function: ease-in-out;
+	        animation-timing-function: ease-in-out;
+}
+
+
+@-webkit-keyframes logo {
+	0% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(1.07);
+		        transform: scale(1.07);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+	}
+}
+
+@keyframes logo {
+	0% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(1.07);
+		        transform: scale(1.07);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+	}
+}
+
+.playercount {
+	display: inline-block;
+	margin: 20px 15px 0 15px;
+	padding: 2px 0;
+	background-color: rgba(15, 199, 209, 0.75);
+	font-size: 1em;
+	color: white;
+	text-align: center;
+	border-radius: 5px 0 5px 0;
+	line-height: 27px;
+}
+
+.playercount > p > span {
+	font-weight: bold;
+	padding: 1px 4px;
+	border-radius: 3px;
+	background: rgba(9, 150, 158, 0.7);
+	margin: 0 2px;
+}
+
+.extrapad {
+	padding: 0;
+}
+
+.ip {
+	cursor: pointer;
+}
+
+.items {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+	-ms-flex-preferred-size: 100px;
+	    flex-basis: 100px;
+	padding: 18px 0 10px 0;
+
+}
+
+.item img {
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	margin-bottom: 7px;
+}
+
+.item img:hover {
+	-webkit-transform:scale(1.1);
+	    -ms-transform:scale(1.1);
+	        transform:scale(1.1);
+}
+
+.img {
+	width: 80%;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 17px;
+	color: white;
+}
+
+.subtitle {
+	color: #cfcfcf;
+	font-size: 12px;
+}
+
+.title,
+.subtitle {
+	margin: 0;
+	padding: 0;
+}
+
+
+@media(min-width: 400px) {
+	.logo img {
+		width: 280px; /* Change image size for mid sized devices */
+	}
+
+	.playercount {
+		margin-top: 30px;
+		padding: 5px;
+	}
+
+	.playercount > p > span {
+		padding: 2px 7px;
+	}
+}
+
+@media(min-width: 1250px) {
+	.title {
+		font-size: 24px;
+	}
+
+	.subtitle {
+		font-size: 15px;
+	}
+
+	.logo img {
+		width: 470px; /* Change image size for desktop */
+	}
+
+	.logo {
+		margin-bottom: 28px;
+	}
+	.img {
+		width: 100%;
+	}
+	.items {
+		padding: 30px 0 20px 0;
+	}
+	.playercount {
+		font-size: 1.22em;
+		padding: 10px;
+	}
+
+	.extrapad {
+		padding: 0 42.5px;
+	}
+
+	.playercount > p > span {
+		padding: 4px 7px;
+	}
+}
+
+@media(min-width: 1000px) {
+	.items {
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+	}
+
+	.item:not(:first-child) {
+		margin-left: 90px;
+	}
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="logo">
+			<!-- In the img folder, upload your logo -->
+			<!-- Make sure you name it 'logo.png' or update the code below -->
+			<img src="img/logo.png" alt="MyServer logo">
+		</div>
+
+		<div class="items">
+			<!-- Replace # with your forum URL-->
+			<a href="#" class="item forums">
+			<div>
+				<img src="img/forums.png" alt="Minecraft forums icon" class="img">
+				<p class="subtitle">chat on our</p>
+				<p class="title">Forums</p>
+			</div>
+			</a>
+
+			<!-- Replace # with your store URL -->
+			<a href="#" class="item store">
+			<div>
+				<img src="img/store.png" alt="Minecraft store icon" class="img">
+				<p class="subtitle">donate on our</p>
+				<p class="title">Store</p>
+			</div>
+			</a>
+
+			<!-- Replace # with your vote URL -->
+			<a href="#" class="item vote">
+			<div>
+				<img src="img/vote.png" alt="Minecraft voting icon" class="img">
+				<p class="subtitle">support us by</p>
+				<p class="title">Voting</p>
+			</div>
+			</a>
+
+		</div>
+
+		<div class="playercount">
+			<!-- Replace play.cubecraft.net with your server IP address -->
+			<!-- Do it on both line 66 and line 67 -->
+			<!-- Please set both your IP and port -->
+			<p>Join <span class="sip" data-ip="play.cubecraft.net" data-port="25565">
+			</span> other players on <span class="ip">play.cubecraft.net</span></p>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>!function(a){var b={total:10,ofTop:0,ofLeft:0,on:"document.body",twinkle:.2,minPixel:1,maxPixel:2,color:"#fff",namespace:"jqueryFireFly",zIndex:Math.ceil(20*Math.random())-1,borderRadius:"50%",_paused:!1};a.firefly=function(c){if(a.firefly.settings=a.extend({},b,c),a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width(),a(window).resize(function(){if("document.body"!==a.firefly.settings.on){var b=a(a.firefly.settings.on).offset();a.firefly.offsetTop=b.top,a.firefly.offsetLeft=b.left,a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width()}else a.firefly.offsetTop=0,a.firefly.offsetLeft=0,a.firefly.eleHeight=a(document.body).height(),a.firefly.eleWidth=a(document.body).width()}),"document.body"!==a.firefly.settings.on){var d=a(a.firefly.settings.on).offset();a.firefly.offsetTop=d.top,a.firefly.offsetLeft=d.left,a.firefly.eleHeight=a(a.firefly.settings.on).height(),a.firefly.eleWidth=a(a.firefly.settings.on).width()}else a.firefly.offsetTop=0,a.firefly.offsetLeft=0,a.firefly.eleHeight=a(document.body).height(),a.firefly.eleWidth=a(document.body).width();for(i=0;i<a.firefly.settings.total;i++){var e=a.firefly.randomPixel(a.firefly.settings.minPixel,a.firefly.settings.maxPixel),f=a.firefly.create(e);a.firefly.fly(f)}return a.firefly.sparks=a(a.firefly.settings.on).children("."+a.firefly.settings.namespace),this},a.firefly.pause=function(b){a.firefly.settings._paused=!0,b&&a.each(a.firefly.sparks,function(b,c){a(c).stop(!0)})},a.firefly.resume=function(){a.firefly.settings._paused=!1,a.each(a.firefly.sparks,function(b,c){a.firefly.fly(c)})},a.firefly.create=function(b){return spark=a("<div>").hide(),spark.addClass(a.firefly.settings.namespace),a.firefly.settings._onSparkID++,"document.body"===a.firefly.settings.on?a(document.body).append(spark):a(a.firefly.settings.on).append(spark),spark.css({position:"absolute",width:b,height:b,"background-color":a.firefly.settings.color,"z-index":a.firefly.settings.zIndex,"border-radius":a.firefly.settings.borderRadius,top:a.firefly.offsetTop+a.firefly.random(a.firefly.eleHeight-50),left:a.firefly.offsetLeft+a.firefly.random(a.firefly.eleWidth-50),"pointer-events":"none"}).show()},a.firefly.fly=function(b){a(b).animate({top:a.firefly.offsetTop+a.firefly.random(a.firefly.eleHeight-50),left:a.firefly.offsetLeft+a.firefly.random(a.firefly.eleWidth-50),opacity:a.firefly.opacity(a.firefly.settings.twinkle)},{duration:2e3*(a.firefly.random(10)+5),done:function(){a.firefly.settings._paused||a.firefly.fly(b)}})},a.firefly.randomPixel=function(a,b){return Math.floor(Math.random()*(b-a+1)+a)},a.firefly.random=function(a){return Math.ceil(Math.random()*a)-1},a.firefly.opacity=function(a){return op=Math.random(),op<a?0:1}}(jQuery);
+</script>
+	<script>
+	// If you don't want the particles, change the following to false
+const doParticles = true;
+
+
+
+
+// Do not mess with the rest of this file unless you know what you're doing
+
+const getWidth = () => { // credit to travis on stack overflow
+    return Math.max(
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.documentElement.clientWidth
+    );
+};
+
+if (doParticles) {
+    if (getWidth() < 400) $.firefly({
+        minPixel: 1,
+        maxPixel: 2,
+        total: 20
+    });
+    else $.firefly({
+        minPixel: 1,
+        maxPixel: 3,
+        total: 40
+    });
+}
+
+// This is for the click to copy
+let t;
+$(document).ready(() => {
+    t = $(".ip").html();
+});
+
+$(document).on("click", ".ip", () => {
+    let copy = document.createElement("textarea");
+    copy.style.position = "absolute";
+    copy.style.left = "-99999px";
+    copy.style.top = "0";
+    copy.setAttribute("id", "ta");
+    document.body.appendChild(copy);
+    copy.textContent = t;
+    copy.select();
+    document.execCommand("copy");
+    $(".ip").html("<span class='extrapad'>IP copied!</span>");
+    setTimeout(() => {
+        $(".ip").html(t);
+        var copy = document.getElementById("ta");
+        copy.parentNode.removeChild(copy);
+    }, 800);
+});
+
+// This is to fetch the player count
+$(document).ready(() => {
+    let ip = $(".sip").attr("data-ip");
+    let port = $(".sip").attr("data-port");
+    if (port == "" || port == null) port = "25565";
+    if (ip == "" || ip == null) return console.error("Error fetching player count - is the IP set correctly in the HTML?");
+    updatePlayercount(ip, port);
+    // Updates every minute (not worth changing due to API cache)
+    setInterval(() => {
+        updatePlayercount(ip, port);
+    }, 60000);
+});
+
+const updatePlayercount = (ip, port) => {
+    $.get(`https://api.bybilly.uk/api/players/${ip}/${port}`, (result) => {
+        if (result.hasOwnProperty('online')) {
+            $(".sip").html(result.online);
+        } else {
+            $(".playercount").html("Server isn't online!");
+        }
+    });
+};
+	</script>
+</body>
+</html>

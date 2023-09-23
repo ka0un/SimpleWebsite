@@ -1,6 +1,9 @@
 name: SimpleWebsite
 version: '${project.version}'
 main: org.kasun.website.SimpleWebsite
+description: A simple Minecraft plugin that allows you to host a website on an MC server! with Html CSS JavaScript Support
+author: Kasun Hapangama
+website: https://ka0un.github.io/simplewebsite/
 softdepend:
   - PlaceholderAPI
 commands:

@@ -107,7 +107,7 @@ public class WebServer {
         File exampleHtml = new File(plugin.getDataFolder() + "/public/" + websiteFolder + "/" + indexFile);
 
         if (!exampleHtml.exists()) {
-            System.out.println(indexFile + " not found, creating..." + exampleHtml);
+            plugin.getLogger().info(indexFile + " not found, creating..." + exampleHtml);
             FileUtils fileUtils = new FileUtils();
 
             try {
