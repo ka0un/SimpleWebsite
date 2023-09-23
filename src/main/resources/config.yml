@@ -1,19 +1,52 @@
-
-
-
 #==============================================================================
-# Web Server configuration
+#  ____ _ _  _ ___  _    ____ _ _ _ ____ ___  ____ _ ___ ____
+#  [__  | |\/| |__] |    |___ | | | |___ |__] [__  |  |  |___
+#  ___] | |  | |    |___ |___ |_|_| |___ |__] ___] |  |  |___
+#  Simple Plugin That Lets you host a website on your server
+#
+#  Created by: Kasun Hapangama
+#  Website: https://ka0un.github.io/simplewebsite/
+#  GitHub: https://github.com/ka0un/SimpleWebsite
+#  Discord: https://dsc.gg/sundevs
 #==============================================================================
 webserver:
+  # Website Configurations
   domain: localhost
+    # If you are connected a domain to your minecraft server then enter it here.
+    # you can leave it as localhost if you are not using a domain.
+
   indexFile: index.html
+    # The file that will be loaded when a user visits your website.
+    # You can change this to any file name you want.
+
   port: 8081
+    # The port that the webserver will run on.
+    # You can change this to any port you want.
+    # you have to allocate the port from your server host before changing this.
+    # once configured you can access your website by visiting http://localhost:8081 (replace localhost with your domain or server ip)
+
 ssl:
+  # SSL Configurations
   useSSL: false
+    # If you want to use SSL then set this to true.
+    # You have to configure the SSL settings below if you want to use SSL.
+
   keystorePassword: test
+    # The password of the keystore file.
+    # You can change this to any password you want.
+
 api:
+   # API Configurations
   apiOnly: false
+    # If you want to use the API only then set this to true.
+    # This will disable the webserver and only run the API.
+
   whitelistPlaceholders: false
+    # If you want to whitelist the placeholders then set this to true.
+    # This will only allow the placeholders that are listed in the whitelist.
+    # You can add placeholders to the whitelist below.
+    # This will prevent other parties from accessing your server data.
+
   placeholder-whitelist:
     - 'server_online'
     - 'server_max_players'

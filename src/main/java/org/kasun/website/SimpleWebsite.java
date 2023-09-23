@@ -1,6 +1,7 @@
 package org.kasun.website;
 
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.website.Utils.Metrics;
 import org.kasun.website.Utils.StaticLogger;
